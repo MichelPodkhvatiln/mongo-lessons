@@ -1,11 +1,26 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
-//connect to database
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
+//Connect the db before test run
+before((done) => {
+  //Connect to database
+  mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
 
-db.once('open', () => {
-  console.log('Connection has been made');
+  db.once('open', () => {
+    console.log('Connection has been made');
+    done();
+  });
+
+  db.on('error', console.error.bind(console, 'Connection error:'))
 });
 
-db.on('error', console.error.bind(console, 'connection error:'))
+//Drop the characters collections before each test
+beforeEach((done) => {
+  const mariochars = db.collections.mariochars;
+
+  mariochars.drop(() => {
+    done();
+  });
+});
+
+
