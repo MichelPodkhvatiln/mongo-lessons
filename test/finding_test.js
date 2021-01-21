@@ -16,14 +16,14 @@ describe('Finding records', () => {
     });
   });
 
-  it('Find record test', (done) => {
+  it('Find one record test', (done) => {
     MarioChar.findOne({name: 'Mario'}).then((result) => {
       assert(result.name === 'Mario');
       done();
     });
   });
 
-  it('Find record by ID test', (done) => {
+  it('Find one record by ID test', (done) => {
     if (!char) {
       return
     }
