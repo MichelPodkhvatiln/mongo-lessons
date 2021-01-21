@@ -11,7 +11,6 @@ describe('Deleting records', () => {
     char = new MarioChar(charParams);
 
     char.save().then(() => {
-      assert(char.isNew === false);
       done();
     });
   });

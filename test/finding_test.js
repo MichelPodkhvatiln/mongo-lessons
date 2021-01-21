@@ -11,7 +11,6 @@ describe('Finding records', () => {
     char = new MarioChar(charParams);
 
     char.save().then(() => {
-      assert(char.isNew === false);
       done();
     });
   });
@@ -24,10 +23,6 @@ describe('Finding records', () => {
   });
 
   it('Find one record by ID test', (done) => {
-    if (!char) {
-      return
-    }
-
     MarioChar.findOne({_id: char.id}).then((result) => {
       assert(result._id.toString() === char._id.toString());
       done();
